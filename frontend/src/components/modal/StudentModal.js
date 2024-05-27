@@ -17,7 +17,7 @@ const StudentModal = (props) => {
             setLoading(true);
             getStudent(id)
                 .then((result) => {
-                    setStudent(result.data.data);
+                    setStudent(result.data);
                 })
                 .catch((error) => {
                     message.error("Failed to fetch student data.");
@@ -35,7 +35,7 @@ const StudentModal = (props) => {
     const handleSubmit = (newData) => {
         setLoading(true);
         const apiCall = isAdding ? addStudent(newData) : updateStudent(id, newData);
-        
+
         apiCall
             .then(() => {
                 message.success(`${isAdding ? "Added" : "Updated"} student successfully!`);
@@ -116,14 +116,17 @@ const StudentModal = (props) => {
                                 <Input disabled={!isEdit} placeholder='Please input Email' />
                             </Form.Item>
                         </Col>
+                        <Col>
+                            {isEdit && (
+                                <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                                    <Button type='primary' htmlType='submit'>
+                                        Submit
+                                    </Button>
+                                </Form.Item>
+                            )}
+                        </Col>
                     </Row>
-                    {isEdit && (
-                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                            <Button type='primary' htmlType='submit'>
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    )}
+
                 </Spin>
             </Form>
         </div>

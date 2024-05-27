@@ -6,6 +6,8 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import "./App.css";
 import StudentModal from "./components/modal/StudentModal";
 
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*' // for POST requests
+
 function App() {
     // State variables
     const [students, setStudents] = useState();
@@ -13,16 +15,17 @@ function App() {
     const [isOpen, setIsOpen] = useState(false);
     const [isEdit, setIsEdit] = useState(true);
     const [reload, setReload] = useState(true);
-    
+
     // API URL
-    const url = `http://0.0.0.0:80/api/v1`;
+    const url = `http://localhost:5000/api`;
 
     // Fetch students data on component mount or reload
     useEffect(() => {
         if (reload) {
             axios.get(`${url}/students`)
                 .then((res) => {
-                    setStudents(res.data.data);
+                    console.log(res.data)
+                    setStudents(res.data);
                     setReload(false); // Reset reload flag after fetching data
                 })
                 .catch((err) => {
@@ -47,7 +50,7 @@ function App() {
         <div className={`App ${isOpen ? "mask" : ""}`}>
             <header className='header'>
                 <div className='text-list'>
-                    VDT Cloud Intern 2024 Management
+                    VDT Students Management
                 </div>
                 <div className="add-icon-container">
                     <PlusCircleOutlined

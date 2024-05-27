@@ -13,7 +13,8 @@
     min-height: 400px;
 }
 
-.ant-input, .ant-input-disabled {
+.ant-input,
+.ant-input-disabled {
     color: black !important;
 }
 
@@ -62,6 +63,7 @@
     border: 2px solid green;
 }
 
-.column-left, .column-right {
+.column-left,
+.column-right {
     flex: 1;
 }
